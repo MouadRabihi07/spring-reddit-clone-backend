@@ -8,6 +8,7 @@ pipeline {
     tools{
         maven "maven3.9.5"
         jdk "jdk17"
+        docker "docker"
     }
 
     stages {
@@ -24,9 +25,19 @@ pipeline {
         }
 
         stage("run unit tests") {
-        steps {
-            sh "mvn test"
+            steps {
+                sh "mvn test"
+            }
         }
+
+        stage("build docker image"){
+            steps {
+                sh "mvn compile jib:dockerBuild"
+                withDockerRegistry(credentialsId: 'a95daabf-e024-41bb-b4f5-009d343e38df', toolName: 'docker') {
+                    sh "docker push redahimmi/spring-reddit-clone"
+                }
+            }
         }
+
     }
 }
