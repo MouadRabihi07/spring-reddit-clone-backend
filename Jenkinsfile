@@ -5,6 +5,11 @@ pipeline {
         }
     }
 
+    tools{
+        maven "maven3.9.5"
+        jdk "jdk11"
+    }
+
     stages {
         stage('checkout code') {
             steps {
@@ -13,11 +18,15 @@ pipeline {
         }
 
         stage("Compile") {
-            sh "mvn clean compile"
+            steps {
+                sh "mvn clean compile"
+            }
         }
 
         stage("run unit tests") {
+        steps {
             sh "mvn test"
+        }
         }
     }
 }
