@@ -35,11 +35,10 @@ pipeline {
             }
         }
 
+
         stage('build docker image'){
             steps {
                 script {
-                    sh 'docker --version'
-                    sh 'docker pull nginx:latest'
                     sh 'mvn compile jib:dockerBuild'
                     withDockerRegistry(credentialsId: '996a93d4-f694-43b6-911e-f9a4be5e9181', toolName: 'docker') {
                         sh 'docker push redahimmi/spring-reddit-clone'
@@ -49,4 +48,4 @@ pipeline {
         }
 
     }
-}
+}²
