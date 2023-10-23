@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 jobs:
   build:
     name: Build
@@ -30,14 +31,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Test Connectivity to SonarQube
-        run: |
-          SONARQUBE_URL="${{ secrets.SONAR_HOST_URL }}"
-          curl --head --fail --silent --show-error --output /dev/null "$SONARQUBE_URL"
-        continue-on-error: true  # Continue with the workflow even if the test fails
       - name: Build and analyze
-        if: success()  # Only run if the previous step (connectivity test) succeeded
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtZ6McqVMs-RJ5p2KNJ -Dsonar.projectName='spring-reddit-clone-backend'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtaPFw-v9qZQuqLd0fT -Dsonar.projectName='spring-reddit-clone-backend'
