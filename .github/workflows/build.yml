@@ -42,8 +42,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtZ6McqVMs-RJ5p2KNJ -Dsonar.projectName='spring-reddit-clone-backend'
-```
-
-This modified workflow adds the "Test Connectivity to SonarQube" step before the "Build and analyze" step. It uses the `curl` command to test connectivity to your SonarQube server, and it continues the workflow even if the connectivity test fails (thanks to `continue-on-error: true`).
-
-The "Build and analyze" step is conditioned to run only if the connectivity test step (`Test Connectivity to SonarQube`) is successful. This ensures that the analysis is performed only when the server is reachable. If the connectivity test fails, the workflow will continue, but the analysis step will be skipped.
