@@ -35,4 +35,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtZn-KCgLoS05WjCmzi -Dsonar.projectName='spring-reddit-clone-backend'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtZ6McqVMs-RJ5p2KNJ -Dsonar.projectName='spring-reddit-clone-backend'
