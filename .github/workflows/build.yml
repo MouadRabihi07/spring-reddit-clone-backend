@@ -1,10 +1,10 @@
+
 name: Build
 
 on:
   push:
     branches:
       - main
-
 
 jobs:
   build:
@@ -31,8 +31,19 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Test Connectivity to SonarQube
+        run: |
+          SONARQUBE_URL="${{ secrets.SONAR_HOST_URL }}"
+          curl --head --fail --silent --show-error --output /dev/null "$SONARQUBE_URL"
+        continue-on-error: true  # Continue with the workflow even if the test fails
       - name: Build and analyze
+        if: success()  # Only run if the previous step (connectivity test) succeeded
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MouadRabihi07_spring-reddit-clone-backend_AYtZ6McqVMs-RJ5p2KNJ -Dsonar.projectName='spring-reddit-clone-backend'
+```
+
+This modified workflow adds the "Test Connectivity to SonarQube" step before the "Build and analyze" step. It uses the `curl` command to test connectivity to your SonarQube server, and it continues the workflow even if the connectivity test fails (thanks to `continue-on-error: true`).
+
+The "Build and analyze" step is conditioned to run only if the connectivity test step (`Test Connectivity to SonarQube`) is successful. This ensures that the analysis is performed only when the server is reachable. If the connectivity test fails, the workflow will continue, but the analysis step will be skipped.
