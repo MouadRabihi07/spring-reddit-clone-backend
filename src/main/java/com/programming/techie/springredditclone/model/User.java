@@ -1,9 +1,6 @@
 package com.programming.techie.springredditclone.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
@@ -14,6 +11,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Entity
 @Builder
+@Table(name = "\"user\"")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -51,6 +51,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/comments")
+                        .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/subreddit")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/")

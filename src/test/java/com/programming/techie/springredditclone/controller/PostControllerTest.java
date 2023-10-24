@@ -18,6 +18,7 @@ import static java.util.Arrays.asList;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @WebMvcTest(controllers = PostController.class)
 class PostControllerTest {
 
@@ -65,4 +66,24 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.id", Matchers.is(2)))
                 .andExpect(jsonPath("$.postName", Matchers.is("Post Name 2")));
     }
+
+    // Integration Testing
+
+//    @Sql(statements = {
+//            "INSERT INTO post (post_id, post_name, description, subreddit_id) VALUES (1, 'Post Name 1', 'Post Description 1', 1);",
+//            "INSERT INTO post (post_id, post_name, description) VALUES (2, 'Post Name 2', 'Post Description 2');"
+//    }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+//    @Sql(statements = {
+//            "DELETE FROM post;"
+//    }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+//    @Test
+//    void shouldListPostsII() throws Exception{
+//
+//        mockMvc.perform(get("/api/posts"))
+//                .andExpect(status().is(200))
+//                .andExpect(jsonPath("$.size()", Matchers.is(2)))
+//                .andExpect(jsonPath("$[0].postName", Matchers.is("Post Name 1")))
+//                .andExpect(jsonPath("$[1].postName", Matchers.is("Post Name 2")));
+//    }
+
 }

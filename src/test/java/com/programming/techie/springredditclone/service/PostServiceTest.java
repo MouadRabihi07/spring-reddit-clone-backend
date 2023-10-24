@@ -55,7 +55,7 @@ class PostServiceTest {
         Post post = new Post(123L, "First Post", "http://url.site", "Test",
                 0, null, Instant.now(), null);
         PostResponse expectedPostResponse = new PostResponse(123L, "First Post", "http://url.site", "Test",
-                "Test User", "Test Subredit", 0, 0, "1 Hour Ago", false, false);
+                "Test User", "Test Subreddit", 0, 0, "1 Hour Ago", false, false);
 
         Mockito.when(postRepository.findById(123L)).thenReturn(Optional.of(post));
         Mockito.when(postMapper.mapToDto(Mockito.any(Post.class))).thenReturn(expectedPostResponse);

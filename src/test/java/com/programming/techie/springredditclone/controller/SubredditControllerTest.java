@@ -32,7 +32,6 @@ class SubredditControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     Subreddit subreddit1;
     Subreddit subreddit2;
     @BeforeEach
