@@ -25,9 +25,12 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Test SonarQube Connection
+      - name: Test SonarQube Connection 1
         run: |
           echo "SonarQube Host URL: ${{ secrets.SONAR_HOST_URL }}"
+      - name: Test SonarQube Connection 2
+        run: |
+          echo "SonarQube Host URL: ${{ secrets.SONAR_TOKEN }}"
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
