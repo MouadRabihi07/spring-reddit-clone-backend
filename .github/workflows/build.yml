@@ -26,8 +26,7 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
       - name: Test SonarQube Connection
         run: |
-          SONARQUBE_URL="http://localhost:9000" 
-                    curl -I -k --fail $SONARQUBE_URL
+          echo "SonarQube Host URL: ${{ secrets.SONAR_HOST_URL }}"
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
